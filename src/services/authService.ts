@@ -1,18 +1,26 @@
 import { IUserData } from "../types/userTypes";
-import { conflictError, notFoundError, unauthorizedError } from "../utils/errorUtils";
+import { conflictError,unprocessableEntity, notFoundError, unauthorizedError } from "../utils/errorUtils";
 import * as authRepository from "../repositories/authRepository";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import "../setup";
 
 
-async function createUser(user:IUserData) {
-    const existisUser = await authRepository.findUserByEmail(user.email);
+async function createUser(email: string, password: string, confirmPassword: string) {
+    const existisUser = await authRepository.findUserByEmail(email);
     if(existisUser) throw conflictError("User already exist");
 
-    
-    const hashedPassword = bcrypt.hashSync(user.password, parseInt(process.env.SALT!));
-    await authRepository.insertUser({...user, password: hashedPassword});
+    if (password !== confirmPassword){
+        throw unprocessableEntity("password, inputs do not match");
+    }
+
+    const hashedPassword = bcrypt.hashSync(password, parseInt(process.env.SALT!));
+
+    const newUser : IUserData = {
+        email,
+        password: hashedPassword
+    }
+    await authRepository.insertUser(newUser);
 }
 
 
