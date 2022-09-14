@@ -1,9 +1,11 @@
 import { Router } from "express";
-import {teste} from "../controllers/teste";
+import {signUp, signIn} from "../controllers/authController";
+import {validateSchemaMiddleware} from "../middlewares/validateSchemaMiddleware";
+import * as authSchema from "../schemas/authSchema";
 
-const testeRouter = Router();
+const authRouter = Router();
 
-testeRouter.get("/teste", teste );
+authRouter.post("/signup", validateSchemaMiddleware(authSchema.userSchema), signUp);
+authRouter.post("/login", validateSchemaMiddleware(authSchema.loginSchema), signIn);
 
-
-export default testeRouter;
+export default authRouter;
