@@ -6,6 +6,6 @@ import * as authSchema from "../schemas/authSchema";
 const authRouter = Router();
 
 authRouter.post("/signup", validateSchemaMiddleware(authSchema.userSchema), signUp);
-authRouter.post("/login", validateSchemaMiddleware(authSchema.loginSchema), signIn);
+authRouter.post("/signin", validateSchemaMiddleware(authSchema.loginSchema), signIn);
 
 export default authRouter;
