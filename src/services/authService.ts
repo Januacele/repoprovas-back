@@ -27,7 +27,7 @@ async function createUser(email: string, password: string, confirmPassword: stri
 async function checkLogin(login:IUserData) {
     const user =  await authRepository.findUserByEmail(login.email);
     if(!user) throw unauthorizedError("Invalid data credentials");
-
+   
     const verifyPassword = bcrypt.compareSync(login.password, user.password);
     if(!verifyPassword) throw unauthorizedError("Invalid data credentials");
 
@@ -38,7 +38,6 @@ async function checkLogin(login:IUserData) {
 async function login(login: IUserData){
     const user = await checkLogin(login);
     const token = jwt.sign({ userId: user.id }, (process.env.JWT_KEY)!);
-
     return token;
 }
 

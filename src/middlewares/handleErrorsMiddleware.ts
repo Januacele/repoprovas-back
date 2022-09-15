@@ -11,4 +11,5 @@ export default function handleErrorsMiddleware(err: IAppError, req: Request, res
     }
   
     res.sendStatus(500);
+    
   }
