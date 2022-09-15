@@ -25,6 +25,7 @@
     "crypt": "^0.0.2",
     "cryptr": "^6.0.3",
     "dotenv": "^16.0.2",
+    "dotenv-cli": "^6.0.0",
     "express": "^4.18.1",
     "express-async-errors": "^3.1.1",
     "joi": "^17.6.0",
@@ -32,6 +33,7 @@
     "pg": "^8.8.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.5.0",
     "@types/axios": "^0.14.0",
     "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.12",

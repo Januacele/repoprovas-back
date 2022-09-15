@@ -38,7 +38,9 @@ async function checkLogin(login:IUserData) {
 async function login(login: IUserData){
     const user = await checkLogin(login);
     const JWT = process.env.JWT_KEY;
+    console.log(JWT);
     const token = jwt.sign({ userId: user.id }, JWT!);
+    console.log(token);
     return token;
 }
 
