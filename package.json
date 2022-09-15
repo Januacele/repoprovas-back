@@ -10,7 +10,7 @@
   "scripts": {
     "test": "npm run prisma-test && cross-env NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -- -i",
     "build": "tsc",
-    "start": "node dist/server.ts",
+    "start": "node dist/server.js",
     "dev": "nodemon src/server.ts",
     "prisma-prod": "prisma migrate deploy",
     "prisma-test": "dotenv -e .env.test prisma migrate reset --skip-seed"
