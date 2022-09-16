@@ -9,7 +9,7 @@ type LoginData = {
 export const userSchema = Joi.object<LoginData>({
     email: Joi.string().email().required(),
     password: Joi.string().required(),
-    confirmPassword: Joi.string().required()
+    confirmPassword: Joi.string().required() 
 });
 
 export const loginSchema = Joi.object<LoginData>({

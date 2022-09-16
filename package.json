@@ -8,7 +8,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "npm run prisma-test && cross-env NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -- -i",
+    "test": "npm run prisma-test && NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -- -i",
     "build": "tsc",
     "start": "node dist/server.js",
     "dev": "nodemon src/server.ts",
