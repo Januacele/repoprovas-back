@@ -1,10 +1,6 @@
 import Joi from "joi";
+import { LoginData } from "../types/userTypes";
 
-type LoginData = {
-    email: string;
-    password: string;
-    confirmPassword: string
-}
 
 export const userSchema = Joi.object<LoginData>({
     email: Joi.string().email().required(),
