@@ -2,7 +2,7 @@ import { prisma } from "../config/database";
 
 
 async function getDiscplineById(id: number){
-    return prisma.category.findUnique({
+    return prisma.discipline.findUnique({
         where: { id },
     });
 }
