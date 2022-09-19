@@ -15,3 +15,9 @@ export async function getTestsByDiscipline(req: Request, res: Response){
 
     res.status(200).send(tests);
 }
+
+export async function getCategories(req: Request, res: Response){
+    const categories = await testService.getTestsCategories();
+
+    res.status(200).send(categories);
+};

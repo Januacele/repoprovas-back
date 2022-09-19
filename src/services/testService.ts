@@ -60,9 +60,17 @@ async function getTestsByDiscipline(disciplineName: string){
 
 }
 
+async function getTestsCategories(){
+    return await categoryRepository.findCategories();
+};
+
+
+
+
 const testService = {
     insertTest,
-    getTestsByDiscipline
+    getTestsByDiscipline,
+    getTestsCategories
 }
 
 
