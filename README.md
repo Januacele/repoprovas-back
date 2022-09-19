@@ -1,7 +1,7 @@
 # <p align = "center"> Projeto Repoprovas-Back </p>
 
 <p align="center">
-   <img src="https://d2eip9sf3oo6c2.cloudfront.net/tags/images/000/001/287/thumb/prismaHD.png"/>
+   <img src="https://miro.medium.com/max/1400/1*PoH0pTYeT1zmX06Ehbq1UA.jpeg"/>
 </p>
 
 <p align = "center">
