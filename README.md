@@ -1,7 +1,7 @@
 # <p align = "center"> Projeto Repoprovas-Back </p>
 
 <p align="center">
-   <img src="[https://user-images.githubusercontent.com/72531277/178094665-f46c6a55-c821-42a0-bb9c-d5dd5f2d69fa.png](https://d2eip9sf3oo6c2.cloudfront.net/tags/images/000/001/287/thumb/prismaHD.png)"/>
+   <img src="https://d2eip9sf3oo6c2.cloudfront.net/tags/images/000/001/287/thumb/prismaHD.png"/>
 </p>
 
 <p align = "center">
@@ -63,6 +63,7 @@ GET /tests/discipline/:name (autenticada)
     - headers: { "Authorization": "Bearer $token" }
     - body: {}
 ``` 
+```yml
 GET /tests/categorie (autenticada)
     - Rota para listar as categorias
     - headers: { "Authorization": "Bearer $token" }
