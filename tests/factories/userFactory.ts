@@ -17,7 +17,7 @@ function loginUser(user: IUserData) {
     return prisma.user.create({
         data: {
             ...user,
-            password: bcrypt.hashSync(user.password, 10),
+            password: bcrypt.hashSync(user.password, 10)
         },
     });
 }

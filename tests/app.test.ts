@@ -6,13 +6,14 @@ import { faker } from "@faker-js/faker";
 import { createNewTest, pickDiscipline } from "./factories/testsFactory";
 
 
+
 beforeEach(async ()=> {
     await prisma.$executeRaw`TRUNCATE TABLE users`;
 });
 
 const teste = supertest(app);
 
-describe("User teste", () => {
+describe("Auth test", () => {
     it("given a valid email and password it should return 201", async () => {
         const user = await userDataFactory.createUser();
 
@@ -75,24 +76,7 @@ describe("User teste", () => {
 });
 
 describe("POST /test", () => {
-    // it("given valid token and valid test data it should return 201", async () => {
-    //     const bodySignup = await userDataFactory.createUser();
-    //     await teste.post("/signup").send(bodySignup);
-
-    //     const bodySignin = {
-    //         email: bodySignup.email,
-    //         password: bodySignup.password
-    //     };
-    //     const resultToken = await teste.post("/signin").send(bodySignin);
-    //     const { token } = resultToken.body;
-    //     // const formatedToken = `Bearer ${token}`;
-
-    //     const body = await createNewTest();
-    //     const result = await teste.post("/tests").set('Authorization', token).send(body);
-
-    //     expect(result.status).toEqual(201);
-    // });
-
+   
     it("given invalid token and valid test data it should return 401", async () => {
         const random = faker.random.alphaNumeric();
         const formatedToken = `Bearer ${random}`;
@@ -212,25 +196,6 @@ describe("POST /test", () => {
 });
 
 describe("GET /tests/discipline/:name", () => {
-    // it("given valid token and valid discipline name it should return 200", async () => {
-    //     const bodySignup = await userDataFactory.createUser();
-    //     await teste.post("signup").send(bodySignup);
-
-    //     const bodySignin = {
-    //         email: bodySignup.email,
-    //         password: bodySignup.password
-    //     };
-    //     const resultToken = await teste.post("/signin").send(bodySignin);
-    //     const token = resultToken.text;
-    //     const formatedToken = `Bearer ${token}`;
-
-    //     const disciplineName = await pickDiscipline();
-
-    //     const result = await teste.get(`/tests/discipline/${disciplineName}`).set('Authorization', formatedToken);
-
-    //     const status = result.status;
-    //     expect(status).toEqual(200);
-    // });
 
     it("given invalid token and valid discipline name it should return 401", async () => {
         const random = faker.random.alphaNumeric();
@@ -263,6 +228,20 @@ describe("GET /tests/discipline/:name", () => {
         const status = result.status;
         expect(status).toEqual(401);
     });
+});
+
+describe("GET /tests/categories", () => {
+
+    it("given invalid token it should return 401", async () => {
+        const random = faker.random.alphaNumeric();
+        const formatedToken = `Bearer ${random}`;
+
+        const result = await teste.get(`/tests/categories`).set('Authorization', formatedToken);
+
+        const status = result.status;
+        expect(status).toEqual(401);
+    });
+
 });
 
 afterAll(async () => {

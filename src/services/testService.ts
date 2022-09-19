@@ -44,7 +44,7 @@ async function getTestsByDiscipline(disciplineName: string){
 
     const termId = discipline.termId;
     const term = await termsRepository.findTermById(termId);
-    const termNumber = term?.number;
+    const termNumber = term?.number
 
     const tests = await testeRepository.findByDiscipline(disciplineId);
 
