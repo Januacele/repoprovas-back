@@ -4,10 +4,13 @@ import bcrypt from "bcrypt";
 import {faker} from "@faker-js/faker";
 
 async function createUser() {
-    return {
+    const password = faker.internet.password();
+    const newUser = {
       email: faker.internet.email(),
-      password: faker.internet.password(),
-    };
+      password,
+      confirmPassword: password
+    }
+    return newUser;
   }
 
 function loginUser(user: IUserData) {

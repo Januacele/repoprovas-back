@@ -8,10 +8,43 @@ async function createTeste(insertData: IcreateData){
     });
 }
 
+async function findByDiscipline(disciplineId: number){
+    const tests : any = await prisma.term.findMany({
+        include: {
+            disciplines: {
+                where: {
+                    id: disciplineId
+                },
+                select: {
+                    id: true,
+                    name: true,
+                    term: {},
+                    teacherDisciplines: {
+                        select: {
+                            id: true,
+                            discipline: {},
+                            teacher: {},
+                            tests: {
+                                select: {
+                                    id: true,
+                                    name: true,
+                                    pdfUrl: true,
+                                    category: {}    
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
 
+    return tests;
+};
 
 const testeRepository = {
-    createTeste
+    createTeste,
+    findByDiscipline
 }
 
 export default testeRepository;

@@ -7,3 +7,11 @@ export async function insertTest(req: Request, res: Response){
     await testService.insertTest(createTest);
     res.status(201).send("Test added");
 }
+
+export async function getTestsByDiscipline(req: Request, res: Response){
+    const disciplineName : string = req.params.name;
+
+    const tests = await testService.getTestsByDiscipline(disciplineName);
+
+    res.status(200).send(tests);
+}

@@ -5,7 +5,7 @@ import teacherRepository from "../repositories/teacherRepository";
 import { notFoundError } from "../utils/errorUtils";
 import teacherDiscplineRepository from "../repositories/teacherDisciplineRepository";
 import testeRepository from "../repositories/testeRepository";
-
+import termsRepository from "../repositories/termsRepository";
 
 async function insertTest(createTest: ITestInput){
     
@@ -32,12 +32,37 @@ async function insertTest(createTest: ITestInput){
         teacherDisciplineId
     };
 
-    await testeRepository.createTeste(insertData);
+    await testeRepository.createTeste(insertData)
 }
 
 
+async function getTestsByDiscipline(disciplineName: string){
+    const discipline = await disciplineRepository.findDisciplineByName(disciplineName);
+    if (!discipline) throw notFoundError("Discipline doesn't exist");
+
+    const disciplineId = discipline.id;
+
+    const termId = discipline.termId;
+    const term = await termsRepository.findTermById(termId);
+    const termNumber = term?.number;
+
+    const tests = await testeRepository.findByDiscipline(disciplineId);
+
+    const formatedTests = tests.filter((x: { disciplines: any[]; }) => {
+        return x.disciplines.length > 0 && x.disciplines.filter(y => {
+            return y.teacherDisciplines.length > 0 && y.teacherDisciplines.filter((z: { tests: string | any[]; }) => {
+                return z.tests.length > 0;
+            });
+        });
+    });
+
+    return formatedTests;
+
+}
+
 const testService = {
-    insertTest
+    insertTest,
+    getTestsByDiscipline
 }
 
 
