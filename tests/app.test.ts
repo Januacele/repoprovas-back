@@ -3,7 +3,7 @@ import userDataFactory from "./factories/userFactory";
 import app from "../src/index";
 import { prisma } from "../src/config/database"
 import { faker } from "@faker-js/faker";
-import { createNewTest } from "./factories/testsFactory";
+import { createNewTest, pickDiscipline } from "./factories/testsFactory";
 
 
 beforeEach(async ()=> {
@@ -209,7 +209,60 @@ describe("POST /test", () => {
         expect(status).toEqual(401);
     });
 
+});
 
+describe("GET /tests/discipline/:name", () => {
+    // it("given valid token and valid discipline name it should return 200", async () => {
+    //     const bodySignup = await userDataFactory.createUser();
+    //     await teste.post("signup").send(bodySignup);
+
+    //     const bodySignin = {
+    //         email: bodySignup.email,
+    //         password: bodySignup.password
+    //     };
+    //     const resultToken = await teste.post("/signin").send(bodySignin);
+    //     const token = resultToken.text;
+    //     const formatedToken = `Bearer ${token}`;
+
+    //     const disciplineName = await pickDiscipline();
+
+    //     const result = await teste.get(`/tests/discipline/${disciplineName}`).set('Authorization', formatedToken);
+
+    //     const status = result.status;
+    //     expect(status).toEqual(200);
+    // });
+
+    it("given invalid token and valid discipline name it should return 401", async () => {
+        const random = faker.random.alphaNumeric();
+        const formatedToken = `Bearer ${random}`;
+
+        const disciplineName = await pickDiscipline();
+
+        const result = await teste.get(`/tests/discipline/${disciplineName}`).set('Authorization', formatedToken);
+
+        const status = result.status;
+        expect(status).toEqual(401);
+    });
+
+    it("given valid token and invalid discipline name it should return 401", async () => {
+        const bodySignup = await userDataFactory.createUser();
+         await teste.post("signup").send(bodySignup);
+
+         const bodySignin = {
+             email: bodySignup.email,
+             password: bodySignup.password
+         };
+        const resultToken = await teste.post("/signin").send(bodySignin);
+        const token = resultToken.text;
+        const formatedToken = `Bearer ${token}`;
+
+        const disciplineName = faker.random.alphaNumeric();
+
+        const result = await teste.get(`/tests/discipline/${disciplineName}`).set('Authorization', formatedToken);
+
+        const status = result.status;
+        expect(status).toEqual(401);
+    });
 });
 
 afterAll(async () => {
