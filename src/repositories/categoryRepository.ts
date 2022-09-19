@@ -1,15 +1,17 @@
 import { prisma } from "../config/database";
 
 
-async function getCategoryById(id: number){
-    return prisma.category.findUnique({
-        where: { id },
-    });
-}
+async function findCategoryByName(name: string){
+    return await prisma.category.findUnique({
+        where: {
+            name
+        }
+    });  
+};
 
 
 const categoryRepository = {
-    getCategoryById
+    findCategoryByName
 }
 
 export default categoryRepository;

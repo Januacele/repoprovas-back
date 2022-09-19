@@ -1,14 +1,14 @@
 import { prisma } from "../config/database";
 
 
-async function getDiscplineById(id: number){
+async function findDisciplineByName(name: string){
     return prisma.discipline.findUnique({
-        where: { id },
+        where: { name }
     });
 }
 
 const categoryDiscipline = {
-    getDiscplineById
+    findDisciplineByName
 }
 
 export default categoryDiscipline;

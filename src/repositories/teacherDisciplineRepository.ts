@@ -1,14 +1,17 @@
 import { prisma } from "../config/database";
 
 
-async function getTeacherAndDiscpline(teacherId: number, disciplineId: number){
+async function findTeacherAndDiscpline(teacherId: number, disciplineId: number){
     return prisma.teachersDisciplines.findFirst({
-        where: { AND : {disciplineId, teacherId} }
+        where: {
+            teacherId,
+            disciplineId
+        }
     });
 }
 
 const teacherDiscplineRepository = {
-    getTeacherAndDiscpline
+    findTeacherAndDiscpline
 }
 
 export default teacherDiscplineRepository;

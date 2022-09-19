@@ -1,14 +1,16 @@
 import { prisma } from "../config/database";
 
 
-async function getTeacherById(id: number){
+async function findTeacherByName(name: string){
     return prisma.teacher.findUnique({
-        where: { id },
+        where: {
+            name
+        }
     });
 }
 
 const categoryTeacher = {
-    getTeacherById
+    findTeacherByName
 }
 
 export default categoryTeacher;

@@ -1,9 +1,8 @@
-import { Prisma } from "@prisma/client";
 import { prisma } from "../config/database";
+import { IcreateData } from "../types/testsTypes"
 
 
-
-async function createTeste(insertData: Prisma.TestUncheckedCreateInput){
+async function createTeste(insertData: IcreateData){
     await prisma.test.create({
         data: insertData,
     });
