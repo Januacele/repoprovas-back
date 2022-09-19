@@ -1,11 +1,12 @@
 import { Router } from "express";
-import {validateSchemaMiddleware} from "../middlewares/validateSchemaMiddleware";
 import { jwtAutenticateMiddleware } from "../middlewares/autenticateJwtMiddleware";
+import { insertTest } from "../controllers/testController";
 
-const authRouter = Router();
+const testsRouter = Router();
 
 
-authRouter.post("/signup", validateSchemaMiddleware(authSchema.userSchema), signUp);
-authRouter.post("/signin", validateSchemaMiddleware(authSchema.loginSchema), signIn);
+testsRouter.use(jwtAutenticateMiddleware);
+testsRouter.get("/tests", insertTest);
 
-export default authRouter;
+
+export default testsRouter;
