@@ -6,7 +6,7 @@ const testsRouter = Router();
 
 
 testsRouter.use(jwtAutenticateMiddleware);
-testsRouter.get("/tests", insertTest);
+testsRouter.post("/tests", insertTest);
 
 
 export default testsRouter;
