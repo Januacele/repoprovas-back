@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-export const newTest = Joi.object({
+export const testSchema = Joi.object({
     name: Joi.string().trim().required(),
     pdfUrl: Joi.string().uri(),
     category: Joi.string().trim().required(),
